@@ -31,8 +31,22 @@ socket.on('connect', () => {
   
 });
 
+socket.on('updateUserList', function(users) {
+  console.log('Users list', users);
+});
+
 socket.on('disconnect', () => {
   console.log('Disconnected from server'); 
+});
+
+socket.on('updateUserList', function(users) {
+  var ol = $('<ol></ol>');
+  
+  users.forEach(function (user) {
+    ol.append($('<li></li>').text(user));
+  });
+  
+  $('#users').append(ol);
 });
 
 socket.on('newMessage', function(message) {
