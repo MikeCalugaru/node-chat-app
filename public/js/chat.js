@@ -40,13 +40,13 @@ socket.on('disconnect', () => {
 });
 
 socket.on('updateUserList', function(users) {
-  var ol = $('<ol></ol>');
-  
+  var ol = $('#users_list');
+  ol.empty();
   users.forEach(function (user) {
     ol.append($('<li></li>').text(user));
   });
   
-  $('#users').append(ol);
+  //$('#users').append(ol);
 });
 
 socket.on('newMessage', function(message) {
@@ -93,7 +93,6 @@ $('#message-form').on('submit', function(e) {
   var messageTextbox = $('[name=message]');
   
   socket.emit('createMessage', {
-    from: 'User',
     text: $('[name=message]').val()
   }, function() {
     $('[name=message]').val('');
